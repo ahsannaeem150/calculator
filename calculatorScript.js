@@ -52,8 +52,8 @@ digitButtonArray.forEach(digitButtonElement => {
 
 //handles if point is pressed when text was empty
 pointBtn.addEventListener('click', () => {
-    if (inputText.textContent == '') {
-        inputText.textContent = '0.';
+    if ((inputText.textContent == '') || (inputText.textContent[inputText.textContent.length - 1] == ' ')) {
+        inputText.textContent += '0.';
     } else {
         inputText.textContent += '.';
     }
@@ -80,8 +80,6 @@ const checkIfFirstCalculation = () => {
 }
 
 
-
-
 const operatorButtonArray = [
     { name: 'divideBtn', property: divideBtn, operatorSign: ' ÷ ' },
     { name: 'multiplyBtn', property: multiplyBtn, operatorSign: ' x ' },
@@ -90,7 +88,7 @@ const operatorButtonArray = [
 ]
 operatorButtonArray.forEach(buttonElement => {
     buttonElement.property.addEventListener('click', () => {
-        if (!checkIfFirstCalculation()) {      //check if first calculation
+        if ((!checkIfFirstCalculation()) && (!(allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)))) {      //check if not first calculation and textContent's second last value is not an operator
             equalBtn.click();
         }
         if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {  //convert calculated result into an input for next calculation
@@ -103,7 +101,7 @@ operatorButtonArray.forEach(buttonElement => {
         if (inputText.textContent == '') {    //treats 0 as numberOne if operator key is pressed directly
             inputText.textContent = `0${buttonElement.operatorSign}`;
         } //replaces operator with another operator rather than adding both in inputText string
-        else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
+        else if ((allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) && !(inputText.textContent[0] == '-')) {
             inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + buttonElement.operatorSign;
         }
         else { //concat operatorSign in the text string
@@ -128,29 +126,26 @@ deleteBtn.addEventListener('click', () => {
     }
 });
 
-
-
-
 equalBtn.addEventListener('click', () => {
     conversion(inputText.textContent);
     switch (operator) {
         case " + ": {
-            calculatedText.textContent = numberOne * numberTwo;
+            calculatedText.textContent = parseFloat(numberOne) + parseFloat(numberTwo);
             signText.textContent = '=';
             break;
         }
         case " - ": {
-            calculatedText.textContent = numberOne - numberTwo;
+            calculatedText.textContent = parseFloat(numberOne) - parseFloat(numberTwo);
             signText.textContent = '=';
             break;
         }
         case " x ": {
-            calculatedText.textContent = numberOne * numberTwo;
+            calculatedText.textContent = parseFloat(numberOne) * parseFloat(numberTwo);
             signText.textContent = '=';
             break;
         }
         case " ÷ ": {
-            calculatedText.textContent = numberOne / numberTwo;
+            calculatedText.textContent = parseFloat(numberOne) / parseFloat(numberTwo);
             signText.textContent = '=';
             break;
         }
