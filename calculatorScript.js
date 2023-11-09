@@ -30,7 +30,9 @@ let [numberOne, operator, numberTwo] = ['', '', ''];
 
 let allOperators = ['+', '-', '÷', 'x'];
 
-
+// const buttonArray = [
+//     {name: 'divideBtn' , property: divideBtn , operatorSign: ' ' }
+// ]
 
 sevenBtn.addEventListener('click', () => {
     inputText.textContent += '7';
@@ -69,28 +71,28 @@ pointBtn.addEventListener('click', () => {
 zeroBtn.addEventListener('click', () => {
     inputText.textContent += '0';
 });
+const conversion = (string) => {
+    if (!string.includes(operator)) {
+        [numberOne, operator, numberTwo] = [string, ' + ', '0'];
+    } else {
+        [numberOne, numberTwo] = string.split(`${operator}`);
+    }
+}
 
+const checkIfFirstCalculation = () => {
+    let checkIfFirst = inputText.textContent;
+    let [numOne, numTwo] = checkIfFirst.split(`${operator}`);
+    if (numTwo == undefined) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
-
-divideBtn.addEventListener('click', () => {
-    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
-        inputText.textContent = calculatedText.textContent;
-    }
-    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
-        inputText.textContent += '0';
-    }
-    operator = ' ÷ ';
-    if (inputText.textContent == '') {
-        inputText.textContent = '0 ÷ ';
-    }
-    else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
-        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' ÷ ';
-    }
-    else {
-        inputText.textContent += ' ÷ ';
-    }
-});
 multiplyBtn.addEventListener('click', () => {
+    if (!checkIfFirstCalculation()) {
+        equalBtn.click();
+    }
     if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
         inputText.textContent = calculatedText.textContent;
     }
@@ -108,7 +110,32 @@ multiplyBtn.addEventListener('click', () => {
         inputText.textContent += ' x ';
     }
 });
+divideBtn.addEventListener('click', () => {
+    if (!checkIfFirstCalculation()) {
+        equalBtn.click();
+    }
+    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
+        inputText.textContent = calculatedText.textContent;
+    }
+    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
+        inputText.textContent += '0';
+    }
+    operator = ' ÷ ';
+    if (inputText.textContent == '') {
+        inputText.textContent = '0 ÷ ';
+    }
+    else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
+        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' ÷ ';
+    }
+    else {
+        inputText.textContent += ' ÷ ';
+    }
+});
+
 minusBtn.addEventListener('click', () => {
+    if (!checkIfFirstCalculation()) {
+        equalBtn.click();
+    }
     if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
         inputText.textContent = calculatedText.textContent;
     }
@@ -125,6 +152,9 @@ minusBtn.addEventListener('click', () => {
     }
 });
 plusBtn.addEventListener('click', () => {
+    if (!checkIfFirstCalculation()) {
+        equalBtn.click();
+    }
     if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
         inputText.textContent = calculatedText.textContent;
     }
@@ -156,16 +186,9 @@ deleteBtn.addEventListener('click', () => {
     }
 });
 
-const conversion = (string) => {
-    if (!string.includes(operator)) {
-        [numberOne, operator, numberTwo] = [string, ' + ', '0'];
-    } else {
-        [numberOne, numberTwo] = string.split(`${operator}`);
-    }
-}
+
 equalBtn.addEventListener('click', () => {
     conversion(inputText.textContent);
-
     switch (operator) {
         case " + ": {
             calculatedText.textContent = numberOne * numberTwo;
@@ -193,5 +216,7 @@ equalBtn.addEventListener('click', () => {
             break;
         }
     }
-})
+}
+
+)
 
