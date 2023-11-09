@@ -30,37 +30,25 @@ let [numberOne, operator, numberTwo] = ['', '', ''];
 
 let allOperators = ['+', '-', '÷', 'x'];
 
-// const buttonArray = [
-//     {name: 'divideBtn' , property: divideBtn , operatorSign: ' ' }
-// ]
+const digitButtonArray = [
+    { name: 'zeroBtn', property: zeroBtn, number: '0' },
+    { name: 'oneBtn', property: oneBtn, number: '1' },
+    { name: 'twoBtn', property: twoBtn, number: '2' },
+    { name: 'threeBtn', property: threeBtn, number: '3' },
+    { name: 'fourBtn', property: fourBtn, number: '4' },
+    { name: 'fiveBtn', property: fiveBtn, number: '5' },
+    { name: 'sixBtn', property: sixBtn, number: '6' },
+    { name: 'sevenBtn', property: sevenBtn, number: '7' },
+    { name: 'eightBtn', property: eightBtn, number: '8' },
+    { name: 'nineBtn', property: nineBtn, number: '9' },
+];
 
-sevenBtn.addEventListener('click', () => {
-    inputText.textContent += '7';
-});
-eightBtn.addEventListener('click', () => {
-    inputText.textContent += '8';
-});
-nineBtn.addEventListener('click', () => {
-    inputText.textContent += '9';
-});
-fourBtn.addEventListener('click', () => {
-    inputText.textContent += '4';
-});
-fiveBtn.addEventListener('click', () => {
-    inputText.textContent += '5';
-});
-sixBtn.addEventListener('click', () => {
-    inputText.textContent += '6';
-});
-oneBtn.addEventListener('click', () => {
-    inputText.textContent += '1';
-});
-twoBtn.addEventListener('click', () => {
-    inputText.textContent += '2';
-});
-threeBtn.addEventListener('click', () => {
-    inputText.textContent += '3';
-});
+digitButtonArray.forEach(digitButtonElement => {
+    digitButtonElement.property.addEventListener('click', () => {
+        inputText.textContent += digitButtonElement.number;
+    })
+})
+
 pointBtn.addEventListener('click', () => {
     if (inputText.textContent == '') {
         inputText.textContent = '0.';
@@ -68,9 +56,10 @@ pointBtn.addEventListener('click', () => {
         inputText.textContent += '.';
     }
 })
-zeroBtn.addEventListener('click', () => {
-    inputText.textContent += '0';
-});
+
+
+
+
 const conversion = (string) => {
     if (!string.includes(operator)) {
         [numberOne, operator, numberTwo] = [string, ' + ', '0'];
@@ -89,88 +78,41 @@ const checkIfFirstCalculation = () => {
     }
 }
 
-multiplyBtn.addEventListener('click', () => {
-    if (!checkIfFirstCalculation()) {
-        equalBtn.click();
-    }
-    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
-        inputText.textContent = calculatedText.textContent;
-    }
-    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
-        inputText.textContent += '0';
-    }
-    operator = ' x ';
-    if (inputText.textContent == '') {
-        inputText.textContent = '0 x ';
-    }
-    else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
-        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' x ';
-    }
-    else {
-        inputText.textContent += ' x ';
-    }
-});
-divideBtn.addEventListener('click', () => {
-    if (!checkIfFirstCalculation()) {
-        equalBtn.click();
-    }
-    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
-        inputText.textContent = calculatedText.textContent;
-    }
-    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
-        inputText.textContent += '0';
-    }
-    operator = ' ÷ ';
-    if (inputText.textContent == '') {
-        inputText.textContent = '0 ÷ ';
-    }
-    else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
-        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' ÷ ';
-    }
-    else {
-        inputText.textContent += ' ÷ ';
-    }
-});
 
-minusBtn.addEventListener('click', () => {
-    if (!checkIfFirstCalculation()) {
-        equalBtn.click();
-    }
-    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
-        inputText.textContent = calculatedText.textContent;
-    }
-    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
-        inputText.textContent += '0';
-    }
-    operator = ' - ';
-    if (inputText.textContent == '') {
-        inputText.textContent = '0 - ';
-    } else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
-        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' - ';
-    } else {
-        inputText.textContent += ' - ';
-    }
-});
-plusBtn.addEventListener('click', () => {
-    if (!checkIfFirstCalculation()) {
-        equalBtn.click();
-    }
-    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
-        inputText.textContent = calculatedText.textContent;
-    }
-    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
-        inputText.textContent += '0';
-    }
-    operator = ' + ';
-    if (inputText.textContent == '') {
-        inputText.textContent = '0 + ';
-    } else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
-        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' + ';
-    }
-    else {
-        inputText.textContent += ' + ';
-    }
-});
+
+
+const operatorButtonArray = [
+    { name: 'divideBtn', property: divideBtn, operatorSign: ' ÷ ' },
+    { name: 'multiplyBtn', property: multiplyBtn, operatorSign: ' x ' },
+    { name: 'minusBtn', property: minusBtn, operatorSign: ' - ' },
+    { name: 'plusBtn', property: plusBtn, operatorSign: ' + ' }
+]
+operatorButtonArray.forEach(buttonElement => {
+    buttonElement.property.addEventListener('click', () => {
+        if (!checkIfFirstCalculation()) {
+            equalBtn.click();
+        }
+        if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
+            inputText.textContent = calculatedText.textContent;
+        }
+        if (inputText.textContent[inputText.textContent.length - 1] == '.') {
+            inputText.textContent += '0';
+        }
+        operator = buttonElement.operatorSign;    //  operator = ' x ';
+        if (inputText.textContent == '') {
+            inputText.textContent = `0${buttonElement.operatorSign}`;
+        }
+        else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
+            inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + buttonElement.operatorSign;
+        }
+        else {
+            inputText.textContent += buttonElement.operatorSign;
+        }
+    })
+})
+
+
+
 
 clearBtn.addEventListener('click', () => {
     inputText.textContent = '';
@@ -185,6 +127,8 @@ deleteBtn.addEventListener('click', () => {
         inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 1);
     }
 });
+
+
 
 
 equalBtn.addEventListener('click', () => {
