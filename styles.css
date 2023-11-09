@@ -1,0 +1,108 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.page-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.calculator-container {
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    width: 35%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.calculator-innerbox {
+    margin: 10px;
+    width: 95%;
+    background-color: white;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.calculator-screen {
+    border: 1px solid black;
+    margin: 10px;
+    align-self: center;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    word-break: break-all;
+    flex-wrap: wrap;
+    width: 95%;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 0px;
+}
+
+.calculator-buttons {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    justify-content: space-between;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: space-between;
+}
+
+.btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    border-color: rgb(6, 139, 255);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.19), 0 6px 6px rgba(0, 179, 255, 0.23);
+    margin: 2px;
+}
+
+.output-bottom {
+    align-self: flex-end;
+}
+
+.output-div {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 10px 5px 10px;
+}
+
+.input-top {
+    font-weight: 200;
+    margin: 10px;
+}
+
+.btnText {
+    font-weight: bold;
+}
+
+/* .clearBtn {
+    background-color: cyan;
+    border-radius: 10px;
+} */
+.deleteBtn {
+    background-color: rgba(44, 217, 194, 0.687)
+}
+
+.clearBtn {
+    background-color: rgb(255, 251, 127);
+}
