@@ -28,7 +28,7 @@ calculatedText.textContent = '';
 
 let [numberOne, operator, numberTwo] = ['', '', ''];
 
-
+let allOperators = ['+', '-', '÷', 'x'];
 
 
 
@@ -76,7 +76,11 @@ divideBtn.addEventListener('click', () => {
     operator = ' ÷ ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 ÷ ';
-    } else {
+    }
+    else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
+        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' ÷ ';
+    }
+    else {
         inputText.textContent += ' ÷ ';
     }
 });
@@ -84,7 +88,11 @@ multiplyBtn.addEventListener('click', () => {
     operator = ' x ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 x ';
-    } else {
+    }
+    else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
+        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' x ';
+    }
+    else {
         inputText.textContent += ' x ';
     }
 });
@@ -92,6 +100,8 @@ minusBtn.addEventListener('click', () => {
     operator = ' - ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 - ';
+    } else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
+        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' - ';
     } else {
         inputText.textContent += ' - ';
     }
@@ -100,7 +110,10 @@ plusBtn.addEventListener('click', () => {
     operator = ' + ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 + ';
-    } else {
+    } else if (allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) {
+        inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + ' + ';
+    }
+    else {
         inputText.textContent += ' + ';
     }
 });
@@ -121,4 +134,14 @@ deleteBtn.addEventListener('click', () => {
     }
 });
 
+const conversion = (string) => {
+    if (!string.includes(operator)) {
+        [numberOne, operator, numberTwo] = [string, ' + ', '0'];
+    } else {
+        [numberOne, numberTwo] = string.split(`${operator}`);
+    }
+}
+equalBtn.addEventListener('click', () => {
+
+})
 
