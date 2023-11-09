@@ -73,6 +73,12 @@ zeroBtn.addEventListener('click', () => {
 
 
 divideBtn.addEventListener('click', () => {
+    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
+        inputText.textContent = calculatedText.textContent;
+    }
+    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
+        inputText.textContent += '0';
+    }
     operator = ' ÷ ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 ÷ ';
@@ -85,6 +91,12 @@ divideBtn.addEventListener('click', () => {
     }
 });
 multiplyBtn.addEventListener('click', () => {
+    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
+        inputText.textContent = calculatedText.textContent;
+    }
+    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
+        inputText.textContent += '0';
+    }
     operator = ' x ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 x ';
@@ -97,6 +109,12 @@ multiplyBtn.addEventListener('click', () => {
     }
 });
 minusBtn.addEventListener('click', () => {
+    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
+        inputText.textContent = calculatedText.textContent;
+    }
+    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
+        inputText.textContent += '0';
+    }
     operator = ' - ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 - ';
@@ -107,6 +125,12 @@ minusBtn.addEventListener('click', () => {
     }
 });
 plusBtn.addEventListener('click', () => {
+    if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {
+        inputText.textContent = calculatedText.textContent;
+    }
+    if (inputText.textContent[inputText.textContent.length - 1] == '.') {
+        inputText.textContent += '0';
+    }
     operator = ' + ';
     if (inputText.textContent == '') {
         inputText.textContent = '0 + ';
@@ -117,8 +141,6 @@ plusBtn.addEventListener('click', () => {
         inputText.textContent += ' + ';
     }
 });
-
-
 
 clearBtn.addEventListener('click', () => {
     inputText.textContent = '';
@@ -142,6 +164,34 @@ const conversion = (string) => {
     }
 }
 equalBtn.addEventListener('click', () => {
+    conversion(inputText.textContent);
 
+    switch (operator) {
+        case " + ": {
+            calculatedText.textContent = numberOne * numberTwo;
+            signText.textContent = '=';
+            break;
+        }
+        case " - ": {
+            calculatedText.textContent = numberOne - numberTwo;
+            signText.textContent = '=';
+            break;
+        }
+        case " x ": {
+            calculatedText.textContent = numberOne * numberTwo;
+            signText.textContent = '=';
+            break;
+        }
+        case " ÷ ": {
+            calculatedText.textContent = numberOne / numberTwo;
+            signText.textContent = '=';
+            break;
+        }
+        default: {
+            calculatedText.textContent = '0';
+            signText.textContent = '=';
+            break;
+        }
+    }
 })
 
