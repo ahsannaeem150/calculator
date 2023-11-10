@@ -1,7 +1,6 @@
 const inputText = document.querySelector('.input-top');
 const signText = document.querySelector('.signTxt');
 const calculatedText = document.querySelector('.output-bottom');
-
 const clearBtn = document.querySelector('.clearBtn');
 const deleteBtn = document.querySelector('.deleteBtn');
 const sevenBtn = document.querySelector('.sevenBtn');
@@ -99,14 +98,16 @@ operatorButtonArray.forEach(buttonElement => {
         if (inputText.textContent[inputText.textContent.length - 1] == '.') {     //pressed when inputNumberOne was 0.  [converts 0. into 0.0]
             inputText.textContent += '0';
         }
-        if (inputText.textContent == '') {    //treats 0 as numberOne if operator key is pressed directly
+        if ((inputText.textContent) == '' && !(buttonElement.operatorSign == ' - ')) {    //treats 0 as numberOne if operator key is pressed directly
             inputText.textContent = `0${buttonElement.operatorSign}`;
         } //replaces operator with another operator rather than adding both in inputText string
         else if ((allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)) && !(inputText.textContent[0] == '-')) {
             inputText.textContent = inputText.textContent.slice(0, inputText.textContent.length - 3) + buttonElement.operatorSign;
         }
-        else { //concat operatorSign in the text string
-            inputText.textContent += buttonElement.operatorSign;
+        else if ((inputText.textContent) == '' && (buttonElement.operatorSign == ' - ')) {  //to add - numbers
+            inputText.textContent += '-';
+        } else {
+            inputText.textContent += buttonElement.operatorSign; //concat operatorSign in the text string
         }
     })
 })
