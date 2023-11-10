@@ -42,12 +42,47 @@ const digitButtonArray = [
     { name: 'nineBtn', property: nineBtn, number: '9' },
 ];
 
+
+
 digitButtonArray.forEach(digitButtonElement => {
     digitButtonElement.property.addEventListener('click', () => {
         inputText.textContent += digitButtonElement.number;
     })
 })
-
+const buttonsArrayToHandleKeyboardEvents = [
+    { key: '.', button: pointBtn },
+    { key: '0', button: zeroBtn },
+    { key: '1', button: oneBtn },
+    { key: '2', button: twoBtn },
+    { key: '3', button: threeBtn },
+    { key: '4', button: fourBtn },
+    { key: '5', button: fiveBtn },
+    { key: '6', button: sixBtn },
+    { key: '7', button: sevenBtn },
+    { key: '8', button: eightBtn },
+    { key: '9', button: nineBtn },
+    { key: '/', button: divideBtn },
+    { key: '*', button: multiplyBtn },
+    { key: '+', button: plusBtn },
+    { key: '-', button: minusBtn },
+    { key: 'Escape', button: clearBtn },
+    // { key: '=', button: equalBtn },
+    // { key: 'Backspace', button: deleteBtn },
+]
+window.addEventListener('keydown', (e) => {
+    if (e.key == 'Backspace') {
+        e.preventDefault();
+        deleteBtn.click();
+    }
+    if (e.key == '=' || e.key == 'Enter') {
+        equalBtn.click();
+    }
+    buttonsArrayToHandleKeyboardEvents.forEach(buttonElement => {
+        if (buttonElement.key == e.key) {
+            buttonElement.button.click();
+        }
+    })
+})
 
 //handles if point is pressed when text was empty
 pointBtn.addEventListener('click', () => {
