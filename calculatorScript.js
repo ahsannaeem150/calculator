@@ -71,14 +71,15 @@ const conversion = (string) => {
 //check if this is the first step in multiple calculation query [Multiple question query = '9 x 9 x 5' where first step is '9 x 9']
 const checkIfFirstCalculation = () => {
     let checkIfFirst = inputText.textContent;
-    let [numOne, numTwo] = checkIfFirst.split(`${operator}`);
+    let [numOne, numTwo, numThree] = checkIfFirst.split(`${operator}`); //on first iteration operator is '';
     if (numTwo == undefined) {
+        return true;
+    } else if (numTwo == checkIfFirst[1]) {  //array is split like this ['1' , '2' , '5' '']; so we check if array[1] == numTwo because this will only return true on first iteration
         return true;
     } else {
         return false;
     }
 }
-
 
 const operatorButtonArray = [
     { name: 'divideBtn', property: divideBtn, operatorSign: ' ÷ ' },
@@ -91,13 +92,13 @@ operatorButtonArray.forEach(buttonElement => {
         if ((!checkIfFirstCalculation()) && (!(allOperators.some((element) => inputText.textContent[inputText.textContent.length - 2] == element)))) {      //check if not first calculation and textContent's second last value is not an operator
             equalBtn.click();
         }
+        operator = buttonElement.operatorSign;    //  operator = ' x ';
         if (!(calculatedText.textContent == '' || calculatedText.textContent == 'Error!')) {  //convert calculated result into an input for next calculation
             inputText.textContent = calculatedText.textContent;
         }
         if (inputText.textContent[inputText.textContent.length - 1] == '.') {     //pressed when inputNumberOne was 0.  [converts 0. into 0.0]
             inputText.textContent += '0';
         }
-        operator = buttonElement.operatorSign;    //  operator = ' x ';
         if (inputText.textContent == '') {    //treats 0 as numberOne if operator key is pressed directly
             inputText.textContent = `0${buttonElement.operatorSign}`;
         } //replaces operator with another operator rather than adding both in inputText string
@@ -145,8 +146,13 @@ equalBtn.addEventListener('click', () => {
             break;
         }
         case " ÷ ": {
-            calculatedText.textContent = parseFloat(numberOne) / parseFloat(numberTwo);
-            signText.textContent = '=';
+            if (numberTwo == '0') {
+                calculatedText.textContent = "Error!";
+                signText.textContent = '=';
+            } else {
+                calculatedText.textContent = parseFloat(numberOne) / parseFloat(numberTwo);
+                signText.textContent = '=';
+            }
             break;
         }
         default: {
